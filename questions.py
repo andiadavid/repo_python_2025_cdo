@@ -30,7 +30,7 @@ correct_answers_index = [1, 2, 0, 3, 1]
 points = float (0)
 
 # .choices() nos permite realizar selecciones con reemplazo
-questions_to_ask = random.choices(list(zip(questions, answers, correct_answers_index)), k=3)
+questions_to_ask = random.sample(list(zip(questions, answers, correct_answers_index)), k=3)
 
 # El usuario deberá contestar 3 preguntas
 for quest,solution,correct_solution in questions_to_ask:
