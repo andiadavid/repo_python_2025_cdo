@@ -25,38 +25,42 @@ answers = [
 ]
 # Índice de la respuesta correcta para cada pregunta, el el mismo orden que las preguntas
 correct_answers_index = [1, 2, 0, 3, 1]
+
 # creo y inicializo los puntos 
 points = float (0)
 
+# .choices() nos permite realizar selecciones con reemplazo
+questions_to_ask = random.choices(list(zip(questions, answers, correct_answers_index)), k=3)
+
 # El usuario deberá contestar 3 preguntas
-for _ in range(3):
+for quest,solution,correct_solution in questions_to_ask:
     # Se selecciona una pregunta aleatoria
-    question_index = random.randint(0, len(questions) - 1)
+    ##question_index = random.randint(0, len(questions) - 1)
 
     # Se muestra la pregunta 
-    print(questions[question_index])
+    print(quest)
     #se muestran las respuestas posibles
-    for i, answer in enumerate(answers[question_index]):
+    for i, answer in enumerate(solution):
         print(f"{i + 1}. {answer}")
 
     # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
         # modifico la entrada 
-        #user_answer = int(input("Respuesta: ")) - 1
+        ##user_answer = int(input("Respuesta: ")) - 1
         user_answer = input("Respuesta: ")
         
         # valido si NO es un entero (termino de inmediato con exit status igual a 1)
-        #print("el tipo ingresado: ", type(user_answer))
+        ##print("el tipo ingresado: ", type(user_answer))
         if user_answer.isdigit(): #importante los parentesis, parametros de la funcion
             user_answer = int(user_answer) - 1
-            #print("el tipo ingresado: ", type(user_answer))
+            ##print("el tipo ingresado: ", type(user_answer))
             # Se verifica si la respuesta es correcta
-            if user_answer == correct_answers_index[question_index]:
+            if user_answer == correct_solution:
                 print("¡Correcto! +1 pts" )
                 points += 1
                 break
             # agrego el elif para poder contar los puntos incorrectos, pero que esten dentro del rango
-            elif (0 <= user_answer < len(answers[question_index])):
+            elif (0 <= user_answer < len(solution)):
                 print("¡Incorrecto! -0.5 pts")
                 points -= 0.5
                 continue
@@ -73,7 +77,7 @@ for _ in range(3):
         # Si el usuario no responde correctamente después de 2 intentos,
         # se muestra la respuesta correcta
         print("Incorrecto. La respuesta correcta es:")
-        print(answers[question_index][correct_answers_index[question_index]])
+        print(solution[correct_solution])
 
     # Se imprime un blanco al final de la pregunta
     print()
