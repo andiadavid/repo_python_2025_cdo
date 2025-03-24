@@ -1,0 +1,4 @@
+clean
+comandos de la terminal de linux
+mkdir	:crea una nueva carpeta
+
