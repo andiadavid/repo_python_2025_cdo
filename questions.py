@@ -25,6 +25,8 @@ answers = [
 ]
 # Índice de la respuesta correcta para cada pregunta, el el mismo orden que las preguntas
 correct_answers_index = [1, 2, 0, 3, 1]
+# creo y inicializo los puntos 
+points = float (0)
 
 # El usuario deberá contestar 3 preguntas
 for _ in range(3):
@@ -50,9 +52,14 @@ for _ in range(3):
             #print("el tipo ingresado: ", type(user_answer))
             # Se verifica si la respuesta es correcta
             if user_answer == correct_answers_index[question_index]:
-                print("¡Correcto!")
+                print("¡Correcto! +1 pts" )
+                points += 1
                 break
-            
+            # agrego el elif para poder contar los puntos incorrectos, pero que esten dentro del rango
+            elif (0 <= user_answer < len(answers[question_index])):
+                print("¡Incorrecto! -0.5 pts")
+                points -= 0.5
+                continue
             #valido si el int esta fuera de rango (termino de inmediato con exit status igual a 1)
             else:
                 print("respueta invalida (fuera rango)")
@@ -70,4 +77,9 @@ for _ in range(3):
 
     # Se imprime un blanco al final de la pregunta
     print()
-#modificacion provando un diff
+    
+# muestro el resultado solo si es mayor a cero
+if points > 0:
+    print("Los puntos generados: ",points)
+else :
+    print("No hay puntos generados ")
